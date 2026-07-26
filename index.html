@@ -23,9 +23,7 @@
       --muted: #6a6585;
     }
 
-    html, body {
-      height: 100%;
-    }
+    html, body { height: 100%; }
 
     body {
       background-color: var(--bg);
@@ -44,11 +42,9 @@
     body::before {
       content: '';
       position: fixed;
-      top: -30%;
-      left: -20%;
-      width: 60%;
-      height: 60%;
-      background: radial-gradient(ellipse, rgba(108, 79, 187, 0.12) 0%, transparent 70%);
+      top: -30%; left: -20%;
+      width: 60%; height: 60%;
+      background: radial-gradient(ellipse, rgba(108,79,187,0.12) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -56,11 +52,9 @@
     body::after {
       content: '';
       position: fixed;
-      bottom: -30%;
-      right: -20%;
-      width: 60%;
-      height: 60%;
-      background: radial-gradient(ellipse, rgba(79, 124, 187, 0.10) 0%, transparent 70%);
+      bottom: -30%; right: -20%;
+      width: 60%; height: 60%;
+      background: radial-gradient(ellipse, rgba(79,124,187,0.10) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -77,6 +71,7 @@
       text-align: center;
     }
 
+    /* The title wrapper gets the animated gradient */
     .title {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
@@ -91,14 +86,15 @@
       animation: fadeDown 1.2s ease both, gradientShift 6s ease infinite;
     }
 
+    /* "for you," sits above Houda, inherits the gradient clip from .title */
     .title-for {
       font-style: italic;
-      font-size: 0.55em;
+      font-size: 0.52em;
       display: block;
-      letter-spacing: 0.12em;
-      opacity: 0.75;
-      margin-bottom: 0.2em;
+      letter-spacing: 0.14em;
+      margin-bottom: 0.15em;
       line-height: 1.6;
+      opacity: 0.8;
     }
 
     @keyframes gradientShift {
@@ -155,25 +151,16 @@
     .btn::after {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 0;
+      bottom: 0; left: 0;
       width: 0%;
       height: 1px;
       background: linear-gradient(90deg, var(--violet), var(--blue));
       transition: width 0.35s ease;
     }
 
-    .btn:hover {
-      opacity: 1;
-    }
-
-    .btn:hover::after {
-      width: 100%;
-    }
-
-    .btn:active {
-      transform: scale(0.97);
-    }
+    .btn:hover { opacity: 1; }
+    .btn:hover::after { width: 100%; }
+    .btn:active { transform: scale(0.97); }
 
     @keyframes fadeDown {
       from { opacity: 0; transform: translateY(-18px); }
