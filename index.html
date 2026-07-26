@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes to Houda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0a0a0f;
+      --violet: #6c4fbb;
+      --blue: #4f7cbb;
+      --text: #f0eef8;
+      --accent: #b8a9e8;
+      --muted: #6a6585;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    /* Ambient background glow */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -30%;
+      left: -20%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(ellipse, rgba(108, 79, 187, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -30%;
+      right: -20%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(ellipse, rgba(79, 124, 187, 0.10) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
+      max-width: 640px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Title */
+    .title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.6rem, 7vw, 4.2rem);
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      background: linear-gradient(270deg, var(--accent), var(--blue), var(--violet), var(--accent));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeDown 1.2s ease both, gradientShift 6s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .title-for {
+      font-style: italic;
+      font-size: 0.6em;
+      display: block;
+      letter-spacing: 0.12em;
+      opacity: 0.75;
+      margin-bottom: 0.15em;
+    }
+
+    /* Note area */
+    .note-wrapper {
+      min-height: 9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .note {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.15rem, 3vw, 1.45rem);
+      line-height: 1.75;
+      color: var(--text);
+      opacity: 0.92;
+      letter-spacing: 0.01em;
+      transition: opacity 0.55s ease, transform 0.55s ease;
+      max-width: 560px;
+    }
+
+    .note.fade-out {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+
+    .note.fade-in {
+      animation: fadeUp 0.65s ease both;
+    }
+
+    /* Button */
+    .btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 0.6rem 0;
+      cursor: pointer;
+      position: relative;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--violet), var(--blue));
+      transition: width 0.35s ease;
+    }
+
+    .btn:hover {
+      opacity: 1;
+      transform: none;
+    }
+
+    .btn:hover::after {
+      width: 100%;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    /* Counter */
+
+
+    /* Animations */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 0.92; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .note, .title, .btn { animation: none; transition: none; }
+    }
+
+    @media (max-width: 480px) {
+      .container { gap: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">
+      <span class="title-for">for you,</span>
+      Houda
+    </h1>
+
+    <div class="note-wrapper">
+      <p class="note" id="note"></p>
+    </div>
+
+    <button class="btn" id="btn" onclick="nextNote()">What else</button>
+
+
+  </div>
+
+  <script>
+    const notes = [
+      "You are emotionally fluent in a way most people spend their whole lives trying to become.",
+      "Time behaves differently around you. An hour feels like a breath. A conversation feels like arriving somewhere.",
+
+
+      "I find myself wanting to tell you everything : the simple thoughts throughout the day, the things floating in my mind, whatever passes through.",
+      "There is something in your beauty that feels like an open question I want to spend a long time answering.",
+      "I want to know everything about you : the books you loved, the stories that moved you, the thoughts you had, the movies you cried for. The things you've never quite said.",
+      "Your kindness is a soft touch I always want to come back to.",
+      "I keep noticing you in my thoughts. Even when the focus is supposed to be somewhere else.",
+      "As far as I am, to be near you is to want to be near you more.",
+      "Sometimes you say something and I think : Yes. Exactly that. How did you know ?",
+      "There's a softness in how you show up for me that I didn't know I was looking for.",
+      "You are the kind of person I want to sit across from for a very long time.",
+      "I don't know everything about you yet. That feels like the best kind of problem to have.",
+      "Every video, every fragment I've seen of you dancing. You are poetry in motion.",
+      "I love when you call me names, I love when you show me what it feels like to be seen, I love when you let me perceive you.",
+    ];
+
+    // Shuffle on load so order feels fresh each visit
+    let shuffled = [...notes];
+    let index = 0;
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function showNote(idx, animate = true) {
+      const el = document.getElementById('note');
+      if (animate) {
+        el.classList.add('fade-out');
+        setTimeout(() => {
+          el.textContent = shuffled[idx];
+          el.classList.remove('fade-out');
+          el.classList.remove('fade-in');
+          void el.offsetWidth; // reflow
+          el.classList.add('fade-in');
+        }, 560);
+      } else {
+        el.textContent = shuffled[idx];
+        el.classList.add('fade-in');
+      }
+    }
+
+    function nextNote() {
+      index = (index + 1) % shuffled.length;
+      if (index === 0) shuffled = shuffle(shuffled); // re-shuffle on cycle
+      showNote(index);
+    }
+
+    // Init
+    shuffled = shuffle(shuffled);
+    showNote(0, false);
+  </script>
+</body>
+</html>
